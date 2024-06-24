@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
+use App\Http\Resources\productResource;
+
 class productController extends Controller
 {
     /**
@@ -14,8 +16,8 @@ class productController extends Controller
      */
     public function index()
     {
-      $products = Product::get();
-      return response()->json($products);
+      $products = Product::all();
+      return $products;
     }
 
     /**
@@ -35,9 +37,9 @@ class productController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //
+        return new productResource($product);
     }
 
     /**
