@@ -19,6 +19,10 @@ class productResource extends JsonResource
         'desk' => $this->desc,
         'harga' => $this->price,
         'create_at' => $this->created_at,
+        'rating' => $this->Reviews->count() > 0  ? $this->Reviews->sum('start')/$this->Reviews->count() : "belum ada rating",
+        'link' => [
+          'reviews' => route('review.index',$this->id)
+        ]
       ];
     }
 }
